@@ -33,7 +33,7 @@ umi.use(signerIdentity(createSignerFromKeypair(umi, keypair)));
       name: "Bober",
       symbol: "BOB",
       uri: "https://a.pinatafarm.com/300x252/43d02d069e/yelling-beaver.jpg",
-      sellerFeeBasisPoints: 10,
+      sellerFeeBasisPoints: 1000, // 1%
       creators: [
         {
           address: keypair.publicKey,
