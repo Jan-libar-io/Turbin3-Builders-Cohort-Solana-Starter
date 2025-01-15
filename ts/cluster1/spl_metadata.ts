@@ -25,7 +25,7 @@ umi.use(signerIdentity(createSignerFromKeypair(umi, keypair)));
 (async () => {
   try {
     let accounts: CreateMetadataAccountV3InstructionAccounts = {
-      mint: mint,
+      mint,
       mintAuthority: signer,
     };
 
