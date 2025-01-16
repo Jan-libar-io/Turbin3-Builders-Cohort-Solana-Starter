@@ -1,10 +1,4 @@
-import {
-  Commitment,
-  Connection,
-  Keypair,
-  LAMPORTS_PER_SOL,
-  PublicKey,
-} from "@solana/web3.js";
+import { Commitment, Connection, Keypair, PublicKey } from "@solana/web3.js";
 import wallet from "../dev-wallet.json";
 import { getOrCreateAssociatedTokenAccount, transfer } from "@solana/spl-token";
 
@@ -16,10 +10,10 @@ const commitment: Commitment = "confirmed";
 const connection = new Connection("https://api.devnet.solana.com", commitment);
 
 // Mint address
-const mint = new PublicKey("8KgAkct5CLnPcNsY2kiU7egoVw8Hxh4iBRpsPcH53gJg");
+const mint = new PublicKey("ABXrt5bjWjrefwv3xrHKTPcqNhghbK1zBW1vdUqz6vBW");
 
 // Recipient address
-const to = new PublicKey("BeKEQdHuADsmAkWgY6qcEJFBpudpoKGQxzhyXxpBHfUB");
+const to = new PublicKey("3pKiN8Q59NEUh4UsopfGAz3vJKJQGEfFnNDscqpxaqVW");
 
 (async () => {
   try {
@@ -46,7 +40,7 @@ const to = new PublicKey("BeKEQdHuADsmAkWgY6qcEJFBpudpoKGQxzhyXxpBHfUB");
       fromWallet.address,
       toWallet.address,
       keypair.publicKey,
-      1e6
+      1
     );
     console.log(`Transaction signature: ${tx}`);
   } catch (e) {
