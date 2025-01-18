@@ -24,7 +24,12 @@
     "vault_withdraw_spl": "ts-node ./cluster1/vault_withdraw_spl.ts",
     "vault_deposit_nft": "ts-node ./cluster1/vault_deposit_nft.ts",
     "vault_withdraw_nft": "ts-node ./cluster1/vault_withdraw_nft.ts",
-    "vault_close": "ts-node ./cluster1/vault_close.ts"
+    "vault_close": "ts-node ./cluster1/vault_close.ts",
+    "nft_image_batch": "ts-node ./cluster1/nft_image_batch.ts",
+    "nft_metadata_batch": "ts-node ./cluster1/nft_metadata_batch.ts",
+    "nft_mint_batch": "ts-node ./cluster1/nft_mint_batch.ts",
+    "nft_verify_batch": "ts-node ./cluster1/nft_verify_batch.ts",
+    "spl_transfer_batch": "ts-node ./cluster1/spl_transfer_batch.ts"
   },
   "dependencies": {
     "@coral-xyz/anchor": "0.29.0",

@@ -1,4 +1,5 @@
 import wallet from "../dev-wallet.json";
+
 import { createUmi } from "@metaplex-foundation/umi-bundle-defaults";
 import {
   createGenericFile,
@@ -7,6 +8,8 @@ import {
 } from "@metaplex-foundation/umi";
 import { irysUploader } from "@metaplex-foundation/umi-uploader-irys";
 import { readFile } from "fs/promises";
+
+import { nftBatch } from "./state/nft";
 
 // Create a devnet connection
 const umi = createUmi("https://api.devnet.solana.com");
@@ -22,20 +25,22 @@ umi.use(
 umi.use(signerIdentity(signer));
 
 (async () => {
-  try {
-    //1. Load image
-    const imageFile = await readFile("cluster1/assets/mana_collection.png");
-
-    //2. Convert image to generic file.
-    const image = createGenericFile(imageFile, "mana_collection.png", {
-      contentType: "image/png",
+  Promise.all(
+    nftBatch.map(async (nft) => {
+      const imageFile = await readFile(nft.filePath);
+      return createGenericFile(imageFile, nft.fileName, {
+        contentType: "image/png",
+      });
+    })
+  )
+    .then(async (allImageCreationResults) => {
+      const images = allImageCreationResults.filter(Boolean);
+      const imageUris = await umi.uploader.upload(images);
+      imageUris.forEach((imageUri) => {
+        console.log(`Your image URI: ${imageUri}`);
+      });
+    })
+    .catch((error) => {
+      console.log("Oops.. Something went wrong", error);
     });
-
-    //3. Upload image
-    const [imageUri] = await umi.uploader.upload([image]);
-
-    console.log("Your image URI: ", imageUri);
-  } catch (error) {
-    console.log("Oops.. Something went wrong", error);
-  }
 })();
